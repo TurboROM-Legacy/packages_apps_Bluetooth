@@ -2019,18 +2019,6 @@ final class HeadsetClientStateMachine extends StateMachine {
         private void processConnectionEvent(int state, BluetoothDevice device) {
             switch (state) {
                 case HeadsetClientHalConstants.CONNECTION_STATE_DISCONNECTED:
-                    if (mRingtone != null && mRingtone.isPlaying()) {
-                        mRingtone.stop();
-                    if (mAudioManager.getMode() ==
-                            AudioManager.MODE_RINGTONE) {
-                        mAudioManager.setMode(AudioManager.MODE_NORMAL);
-                    }
-                    //abandon audio focus
-                    Log.d(TAG, "abandonAudioFocus");
-                    /* abandon audio focus after the mode has
-                     been set back to normal*/
-                    mAudioManager.abandonAudioFocusForCall();
-                    }
                     Log.d(TAG, "Connected disconnects.");
                     // AG disconnects
                     if (mCurrentDevice.equals(device)) {

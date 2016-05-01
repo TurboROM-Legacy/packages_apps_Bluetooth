@@ -62,6 +62,7 @@ import com.android.internal.util.StateMachine;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.Iterator;
@@ -82,6 +83,7 @@ import android.app.NotificationManager;
 public final class Avrcp {
     private static final boolean DEBUG = false;
     private static final String TAG = "Avrcp";
+    private static final String ABSOLUTE_VOLUME_BLACKLIST = "absolute_volume_blacklist";
 
     private Context mContext;
     private final AudioManager mAudioManager;
@@ -4302,7 +4304,7 @@ public final class Avrcp {
 
     private int convertToAudioStreamVolume(int volume) {
         // Rescale volume to match AudioSystem's volume
-        return (int) Math.round((double) volume*mAudioStreamMax/AVRCP_MAX_VOL);
+        return (int) Math.floor((double) volume*mAudioStreamMax/AVRCP_MAX_VOL);
     }
 
     private int convertToAvrcpVolume(int volume) {
